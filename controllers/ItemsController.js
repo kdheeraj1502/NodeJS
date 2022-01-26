@@ -31,7 +31,7 @@ module.exports = {
         const items = await ItemsService.updateItem(req.params.id, name, description, available, price)
         res.json(items)
     } catch (err) {
-        res.send('Error ' + err)
+        res.send('Could not update the item :: ' + err)
     }
 },
 
@@ -65,8 +65,7 @@ const update = async (req, res) => {
         res.send('Error ' + err)
     }
 }*/
-
-    removeItem: async (req, res) => {
+removeItem: async (req, res) => {
     try {
         const items = await Items.findById(req.params.id)
         if (items != null) {
@@ -79,7 +78,16 @@ const update = async (req, res) => {
     } catch (err) {
         res.send('Error ' + err)
     }
-},
+}
+/*   removeItem: async (req, res) => {
+            return await ItemsService.removeItem(req.params.id)
+                .then(function (itemName) {
+                    res.json('Item got deleted ' + itemName)
+                })
+                .catch(function (err) {
+                    res.json('Item Not Present for ID ' + req.params.id)
+                })
+    }*/,
 
     saveItem: (req, res, next) => {
     const items = new Items({

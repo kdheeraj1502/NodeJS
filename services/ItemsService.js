@@ -43,6 +43,7 @@ module.exports = {
         if (price != null) {
             item.price = price
         }
+
         const items = new Items(item)
         return items.save()
             .then(function (saved) {
@@ -50,6 +51,26 @@ module.exports = {
                     throw ({ msg: "Item updated" });
                 }
                 return items;
+            })
+            .catch(error => {
+                res.json({
+                    message: 'An error occured!'
+                })
+            })
+    },
+
+
+    removeItem: function (itemId) {
+        const item = Items.findById(itemId)
+        if (item != null) {
+            return remove(itemId)
+        }
+    },
+
+    remove: function (itemId) {
+        return item.remove()
+            .then(function (removed) {
+                return removed.id;
             })
             .catch(error => {
                 res.json({
